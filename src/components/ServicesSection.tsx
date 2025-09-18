@@ -1,13 +1,13 @@
 import React from 'react';
 import { 
   Globe, Palette, Search, MapPin, BarChart3, ShoppingCart, 
-  Target, Play, Camera, MessageCircle, Mail, Video,
-  ArrowRight, CheckCircle, Facebook, Server, Code, 
-  TrendingUp, Building, Settings, Package
+  Target, Play, Camera, MessageCircle, Mail, Video, ArrowRight, 
+  CheckCircle, Facebook, Server, Code, TrendingUp, Building, 
+  Settings, Package
 } from 'lucide-react';
 import { services } from '../data/services';
 
-const iconMap = {
+const iconMap: { [key: string]: React.ComponentType<any> } = {
   Globe, Palette, Search, MapPin, BarChart3, ShoppingCart,
   Target, Play, Camera, MessageCircle, Mail, Video,
   Facebook, Server, Code, TrendingUp, Building, Settings, Package
@@ -35,7 +35,7 @@ const ServicesSection = () => {
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
-            const Icon = iconMap[service.icon as keyof typeof iconMap];
+            const Icon = iconMap[service.icon] || Target;
             
             return (
               <div 
