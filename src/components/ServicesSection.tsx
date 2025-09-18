@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Globe, Palette, Search, MapPin, BarChart3, ShoppingCart, 
   Target, Play, Camera, MessageCircle, Mail, Video, ArrowRight, 
@@ -14,6 +15,17 @@ const iconMap: { [key: string]: React.ComponentType<any> } = {
 };
 
 const ServicesSection = () => {
+  const serviceRoutes: { [key: string]: string } = {
+    'web-design': '/services/web-design',
+    'seo': '/services/seo',
+    'google-ads': '/services/google-ads',
+    'meta-ads': '/services/meta-ads',
+    'social-media': '/services/social-media',
+    'email-marketing': '/services/email-marketing',
+    'whatsapp-automation': '/services/whatsapp',
+    'content-production': '/services/content-production'
+  };
+
   return (
     <section id="services" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,10 +77,13 @@ const ServicesSection = () => {
                   ))}
                 </ul>
                 
-                <button className="group/btn inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+                <Link 
+                  to={serviceRoutes[service.id] || '#'}
+                  className="group/btn inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300"
+                >
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                </button>
+                </Link>
               </div>
             );
           })}

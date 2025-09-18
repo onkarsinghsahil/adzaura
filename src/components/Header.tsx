@@ -5,7 +5,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '/' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Packages', href: '#packages' },
@@ -42,14 +42,33 @@ const Header = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="text-2xl font-bold text-blue-600">AdzAura</div>
+                <Link to="/" className="text-2xl font-bold text-blue-600">AdzAura</Link>
               </div>
             </div>
 
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {navigation.map((item) => (
-                  <a
+                  {item.href.startsWith('/') ? (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300"
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300"
+                    >
+                      {item.name}
+                    </a>
+                  )}
+                ))}
+              </div>
+            </div>
                     key={item.name}
                     href={item.href}
                     className="text-gray-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-300"
@@ -93,14 +112,25 @@ const Header = () => {
         >
           <div className="px-4 pt-20 pb-3 space-y-3">
             {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-600 hover:text-blue-600 block px-3 py-2 text-base font-medium border-b border-gray-100"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
+              item.href.startsWith('/') ? (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-gray-600 hover:text-blue-600 block px-3 py-2 text-base font-medium border-b border-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-600 hover:text-blue-600 block px-3 py-2 text-base font-medium border-b border-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              )
             ))}
             <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium w-full mt-4">
               Get Free Quote
